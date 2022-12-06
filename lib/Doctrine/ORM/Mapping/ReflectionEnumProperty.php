@@ -87,8 +87,10 @@ class ReflectionEnumProperty extends ReflectionProperty
      */
     private function initializeEnumValue($object, $value): BackedEnum
     {
-        if ($value instanceof BackedEnum) {
+        if ($value instanceof $this->enumType) {
             return $value;
+        } elseif ($value instanceof BackedEnum) {
+           $value = $value->value;
         }
 
         $enumType = $this->enumType;
